@@ -71,8 +71,7 @@ proxy-groups:
   # 冷门地区
   - name: 冷门地区 ❄️
     type: select
-    use:
-      - Subscribe
+    include-all: true
     proxies:
       - 全局直连 🏠
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
@@ -80,8 +79,7 @@ proxy-groups:
   # 手动选择
   - name: 手动选择 👌
     type: select
-    use:
-      - Subscribe
+    include-all: true
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
 
   # 人工智能
@@ -222,10 +220,6 @@ proxy-groups:
   - name: 自动选择 📡
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
 
@@ -233,72 +227,48 @@ proxy-groups:
   - name: 香港节点 🇭🇰
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
-    filter: '(?i)港|HK|Hong Kong|HongKong|🇭🇰'
+    filter: '(?i)🇭🇰|香港|(\b(HK|Hong)\b)'
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
 
   # 台湾节点
   - name: 台湾节点 🇨🇳
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
-    filter: '(?i)台|TAIWAN|TW|TAI WAN|🇹🇼'
+    filter: '(?i)🇨🇳|🇹🇼|台湾|(\b(TW|Tai|Taiwan)\b)'
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
 
   # 美国节点
   - name: 美国节点 🇺🇸
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
-    filter: '(?i)United States|America|USA|US|🇺🇸|美国'
+    filter: '(?i)🇺🇸|美国|洛杉矶|圣何塞|(\b(US|United States)\b)'
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
 
   # 日本节点
   - name: 日本节点 🇯🇵
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
-    filter: '(?i)JP|🇯🇵|日本|Japan'
+    filter: '(?i)🇯🇵|日本|东京|(\b(JP|Japan)\b)'
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
 
   # 新加坡节点
   - name: 新加坡节点 🇸🇬
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
-    filter: '(?i)SG|🇸🇬|新加坡|Singapore'
+    filter: '(?i)🇸🇬|新加坡|狮|(\b(SG|Singapore)\b)'
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
 
   # 韩国节点
   - name: 韩国节点 🇰🇷
     type: url-test
     interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
     include-all: true
-    filter: '(?i)韩国|KR|Korea|KOR|🇰🇷'
+    filter: '(?i)🇰🇷|韩国|(\b(KR|Korea)\b)'
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
 
 # 规则集配置
