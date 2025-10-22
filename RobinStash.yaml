@@ -15,56 +15,31 @@ subscribe-url:
 
 # DNS配置
 dns:
-  enable: true
-  listen: 0.0.0.0:1053
-  ipv6: true
-  use-hosts: false
-  use-system-hosts: true
-  cache-algorithm: arc
-  enhanced-mode: fake-ip
-  fake-ip-range: 198.18.0.1/16
+  # 默认的域名解析服务器
+  nameserver: 
+    - 223.5.5.5
+    - 119.29.29.29
+  # fake ip 白名单列表'以下地址不会下发fakeip映射用于连接
   fake-ip-filter:
-    # 本地主机/设备
     - '+.lan'
     - '+.local'
-    # Windows网络出现小地球图标
     - '+.msftconnecttest.com'
     - '+.msftncsi.com'
-    # QQ快速登录检测失败
     - 'localhost.ptlogin2.qq.com'
     - 'localhost.sec.qq.com'
-    # 微信快速登录检测失败
     - 'localhost.work.weixin.qq.com'
     - 'time.*.com'
     - 'ntp.*.com'
     - '+.market.xiaomi.com'
     - '+.vanch.fun'
     - '+.ipw.cn'
-
-# 域名嗅探配置
-sniffer:
-  enable: true
-  force-dns-mapping: true
-  parse-pure-ip: true
-  override-destination: true
-  sniff:
-    HTTP:
-      ports: [80, 8080-8880]
-      override-destination: true
-    TLS:
-      ports: [443, 8443]
-    QUIC:
-      ports: [443, 8443]
-  force-domain:
-    - '+.v2ex.com'
-  skip-domain:
-    - 'rule-set:ChinaMax_Domain,custom-direct'
-    - 'Mijia Cloud'
-    - '+.push.apple.com'
-    - '+.wechat.com'
-    - '+.qpic.cn'
-    - '+.qq.com'
-    - '+.wechatapp.com'
+    - '+.cmpassport.com'
+    - 'id6.me'
+    - 'open.e.189.cn'
+    - 'mdn.open.wo.cn'
+    - 'opencloud.wostore.cn'
+    - 'auth.wosms.cn'
+    - '+.10099.com.cn'
 
 # > 远程服务器订阅
 proxy-providers:
@@ -96,13 +71,17 @@ proxy-groups:
   # 冷门地区
   - name: 冷门地区 ❄️
     type: select
-    include-all: true
+    use:
+      - Subscribe
+    proxies:
+      - 全局直连 🏠
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
 
   # 手动选择
   - name: 手动选择 👌
     type: select
-    include-all: true
+    use:
+      - Subscribe
     icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
 
   # 人工智能
