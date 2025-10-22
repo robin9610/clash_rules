@@ -1,5 +1,5 @@
-name: Robin的规则
-desc: 最后更新时间 2025-10-22 66:00:00
+# name: Robin的规则
+# desc: 最后更新时间 2025-10-22 66:00:00
 # author: Robin
 # repo: https://github.com/robin9610/clash_rules
 
