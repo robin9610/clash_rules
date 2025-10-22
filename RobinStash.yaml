@@ -1,9 +1,17 @@
-name: Robin的规则覆写
-desc: |-
-  最后更新时间 2025-10-22
-  自动配置代理组和规则
-  作者: Robin
-  仓库: https://github.com/robin9610/clash_rules
+# Robin的规则 - Stash配置文件
+# 最后更新时间: 2025-10-22 66:00:00
+# Author: Robin
+# Repo: https://github.com/robin9610/clash_rules
+
+
+# 规则模式：rule（规则） / global（全局代理）/ direct（全局直连）
+mode: rule
+
+# 日志级别: silent / info / warning / error / debug
+log-level: info
+
+# > 订阅信息展示
+subscribe-url: 
 
 # DNS配置
 dns:
@@ -17,21 +25,21 @@ dns:
   fake-ip-range: 198.18.0.1/16
   fake-ip-filter:
     # 本地主机/设备
-    - "+.lan"
-    - "+.local"
+    - '+.lan'
+    - '+.local'
     # Windows网络出现小地球图标
-    - "+.msftconnecttest.com"
-    - "+.msftncsi.com"
+    - '+.msftconnecttest.com'
+    - '+.msftncsi.com'
     # QQ快速登录检测失败
-    - "localhost.ptlogin2.qq.com"
-    - "localhost.sec.qq.com"
+    - 'localhost.ptlogin2.qq.com'
+    - 'localhost.sec.qq.com'
     # 微信快速登录检测失败
-    - "localhost.work.weixin.qq.com"
-    - "time.*.com"
-    - "ntp.*.com"
-    - "+.market.xiaomi.com"
-    - "+.vanch.fun"
-    - "+.ipw.cn"
+    - 'localhost.work.weixin.qq.com'
+    - 'time.*.com'
+    - 'ntp.*.com'
+    - '+.market.xiaomi.com'
+    - '+.vanch.fun'
+    - '+.ipw.cn'
 
 # 域名嗅探配置
 sniffer:
@@ -41,29 +49,278 @@ sniffer:
   override-destination: true
   sniff:
     HTTP:
-      ports:
-        - 80
-        - 8080-8880
+      ports: [80, 8080-8880]
       override-destination: true
     TLS:
-      ports:
-        - 443
-        - 8443
+      ports: [443, 8443]
     QUIC:
-      ports:
-        - 443
-        - 8443
+      ports: [443, 8443]
   force-domain:
-    - "+.v2ex.com"
+    - '+.v2ex.com'
   skip-domain:
-    - "rule-set:ChinaMax_Domain"
-    - "rule-set:custom-direct"
-    - "Mijia Cloud"
-    - "+.push.apple.com"
-    - "+.wechat.com"
-    - "+.qpic.cn"
-    - "+.qq.com"
-    - "+.wechatapp.com"
+    - 'rule-set:ChinaMax_Domain,custom-direct'
+    - 'Mijia Cloud'
+    - '+.push.apple.com'
+    - '+.wechat.com'
+    - '+.qpic.cn'
+    - '+.qq.com'
+    - '+.wechatapp.com'
+
+# > 远程服务器订阅
+proxy-providers:
+  Subscribe:
+    type: http
+    interval: 86400
+    url: http://your-service-provider
+    benchmark-timeout: 5
+    benchmark-url: http://www.apple.com/generate_204
+
+# 代理组配置
+proxy-groups:
+  # 地区选择
+  - name: 地区选择 🌍
+    type: select
+    proxies:
+      - 自动选择 📡
+      - 手动选择 👌
+      - 香港节点 🇭🇰
+      - 日本节点 🇯🇵
+      - 美国节点 🇺🇸
+      - 台湾节点 🇨🇳
+      - 新加坡节点 🇸🇬
+      - 韩国节点 🇰🇷
+      - 冷门地区 ❄️
+      - 全局直连 🏠
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
+
+  # 冷门地区
+  - name: 冷门地区 ❄️
+    type: select
+    include-all: true
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
+
+  # 手动选择
+  - name: 手动选择 👌
+    type: select
+    include-all: true
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
+
+  # 人工智能
+  - name: 人工智能 🤖
+    type: select
+    proxies:
+      - 日本节点 🇯🇵
+      - 美国节点 🇺🇸
+      - 新加坡节点 🇸🇬
+      - 地区选择 🌍
+      - 手动选择 👌
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
+
+  # 巴哈姆特
+  - name: 巴哈姆特 📺
+    type: select
+    proxies:
+      - 台湾节点 🇨🇳
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 全局直连 🏠
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
+
+  # 谷歌服务
+  - name: 谷歌服务 🇺🇸
+    type: select
+    proxies:
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 香港节点 🇭🇰
+      - 日本节点 🇯🇵
+      - 美国节点 🇺🇸
+      - 台湾节点 🇨🇳
+      - 新加坡节点 🇸🇬
+      - 韩国节点 🇰🇷
+      - 冷门地区 ❄️
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
+
+  # 蒸汽平台
+  - name: 蒸汽平台 🎮
+    type: select
+    proxies:
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 香港节点 🇭🇰
+      - 日本节点 🇯🇵
+      - 美国节点 🇺🇸
+      - 台湾节点 🇨🇳
+      - 新加坡节点 🇸🇬
+      - 韩国节点 🇰🇷
+      - 冷门地区 ❄️
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Steam.png
+
+  # 奈飞服务
+  - name: 奈飞服务 📺
+    type: select
+    proxies:
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 香港节点 🇭🇰
+      - 日本节点 🇯🇵
+      - 美国节点 🇺🇸
+      - 台湾节点 🇨🇳
+      - 新加坡节点 🇸🇬
+      - 韩国节点 🇰🇷
+      - 冷门地区 ❄️
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
+
+  # 电报服务
+  - name: 电报服务 💬
+    type: select
+    proxies:
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 香港节点 🇭🇰
+      - 日本节点 🇯🇵
+      - 美国节点 🇺🇸
+      - 台湾节点 🇨🇳
+      - 新加坡节点 🇸🇬
+      - 韩国节点 🇰🇷
+      - 冷门地区 ❄️
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
+
+  # 微软服务
+  - name: 微软服务 Ⓜ️
+    type: select
+    proxies:
+      - 全局直连 🏠
+      - 地区选择 🌍
+      - 手动选择 👌
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
+
+  # 苹果服务
+  - name: 苹果服务 🍎
+    type: select
+    proxies:
+      - 全局直连 🏠
+      - 地区选择 🌍
+      - 手动选择 👌
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png
+
+  # 全局直连
+  - name: 全局直连 🏠
+    type: select
+    proxies:
+      - DIRECT
+      - REJECT
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png
+
+  # 全局拦截
+  - name: 全局拦截 🚧
+    type: select
+    proxies:
+      - REJECT
+      - DIRECT
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
+
+  # 漏网之鱼
+  - name: 漏网之鱼 🐟
+    type: select
+    proxies:
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 全局直连 🏠
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
+
+  # GLOBAL
+  - name: GLOBAL
+    type: select
+    proxies:
+      - 地区选择 🌍
+      - 手动选择 👌
+      - 全局直连 🏠
+      - 自动选择 📡
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
+
+  # 自动选择
+  - name: 自动选择 📡
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
+
+  # 香港节点
+  - name: 香港节点 🇭🇰
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    filter: '(?i)港|HK|Hong Kong|HongKong|🇭🇰'
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
+
+  # 台湾节点
+  - name: 台湾节点 🇨🇳
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    filter: '(?i)台|TAIWAN|TW|TAI WAN|🇹🇼'
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
+
+  # 美国节点
+  - name: 美国节点 🇺🇸
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    filter: '(?i)United States|America|USA|US|🇺🇸|美国'
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
+
+  # 日本节点
+  - name: 日本节点 🇯🇵
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    filter: '(?i)JP|🇯🇵|日本|Japan'
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
+
+  # 新加坡节点
+  - name: 新加坡节点 🇸🇬
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    filter: '(?i)SG|🇸🇬|新加坡|Singapore'
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
+
+  # 韩国节点
+  - name: 韩国节点 🇰🇷
+    type: url-test
+    interval: 300
+    tolerance: 15
+    timeout: 3000
+    url: https://www.google.com/generate_204
+    lazy: true
+    include-all: true
+    filter: '(?i)韩国|KR|Korea|KOR|🇰🇷'
+    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
 
 # 规则集配置
 rule-providers:
@@ -75,7 +332,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/xishang0128/rules/main/clash%20or%20stash/prevent_dns_leak/prevent_dns_leak_domain.list
     path: ./ruleset/prevent_dns_leak_domain.yaml
-  
+
   # 去广告
   AdvertisingLite_Domain:
     type: http
@@ -84,7 +341,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/AdvertisingLite/AdvertisingLite_Domain.yaml
     path: ./ruleset/AdvertisingLite_Domain.yaml
-  
+
   # 巴哈姆特
   Bahamut:
     type: http
@@ -93,7 +350,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Bahamut/Bahamut.yaml
     path: ./ruleset/Bahamut.yaml
-  
+
   # Netflix
   Netflix:
     type: http
@@ -102,7 +359,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix.yaml
     path: ./ruleset/Netflix.yaml
-  
+
   Netflix_IP:
     type: http
     format: yaml
@@ -110,8 +367,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Netflix/Netflix_IP.yaml
     path: ./ruleset/Netflix_IP.yaml
-  
-  # AI服务
+
+  # AI相关
   Gemini:
     type: http
     format: yaml
@@ -119,7 +376,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Gemini/Gemini.yaml
     path: ./ruleset/Gemini.yaml
-  
+
   Copilot:
     type: http
     format: yaml
@@ -127,7 +384,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Copilot/Copilot.yaml
     path: ./ruleset/Copilot.yaml
-  
+
   Claude:
     type: http
     format: yaml
@@ -135,7 +392,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Claude/Claude.yaml
     path: ./ruleset/Claude.yaml
-  
+
   BardAI:
     type: http
     format: yaml
@@ -143,7 +400,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/BardAI/BardAI.yaml
     path: ./ruleset/BardAI.yaml
-  
+
   OpenAI:
     type: http
     format: yaml
@@ -151,8 +408,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/OpenAI/OpenAI.yaml
     path: ./ruleset/OpenAI.yaml
-  
-  # 大陆域名和IP
+
+  # 中国大陆域名和IP
   ChinaMax_Domain:
     type: http
     format: yaml
@@ -160,7 +417,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_Domain.yaml
     path: ./ruleset/ChinaMax_Domain.yaml
-  
+
   ChinaMax_IP:
     type: http
     format: yaml
@@ -168,8 +425,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/ChinaMax/ChinaMax_IP.yaml
     path: ./ruleset/ChinaMax_IP.yaml
-  
-  # 谷歌服务
+
+  # 谷歌IP
   GoogleIP:
     type: http
     format: yaml
@@ -177,7 +434,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geoip/google.yaml
     path: ./ruleset/GoogleIP.yaml
-  
+
+  # 谷歌域名
   Google:
     type: http
     format: yaml
@@ -185,7 +443,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Google/Google.yaml
     path: ./ruleset/Google.yaml
-  
+
+  # YouTube
   YouTube:
     type: http
     format: yaml
@@ -193,7 +452,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTube/YouTube.yaml
     path: ./ruleset/YouTube.yaml
-  
+
   YouTubeMusic:
     type: http
     format: yaml
@@ -201,7 +460,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/YouTubeMusic/YouTubeMusic.yaml
     path: ./ruleset/YouTubeMusic.yaml
-  
+
   # 非大陆域名
   geolocation-!cn:
     type: http
@@ -210,8 +469,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/meta/geo/geosite/geolocation-!cn.yaml
     path: ./ruleset/geolocation-!cn.yaml
-  
-  # Telegram
+
+  # 电报
   Telegram:
     type: http
     format: yaml
@@ -219,7 +478,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Telegram/Telegram.yaml
     path: ./ruleset/Telegram.yaml
-  
+
   # Steam
   Steam:
     type: http
@@ -228,7 +487,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Steam/Steam.yaml
     path: ./ruleset/Steam.yaml
-  
+
   SteamCN_No_Resolve:
     type: http
     format: yaml
@@ -236,7 +495,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/SteamCN/SteamCN_No_Resolve.yaml
     path: ./ruleset/SteamCN_No_Resolve.yaml
-  
+
   # Apple
   Apple_No_Resolve:
     type: http
@@ -245,7 +504,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_No_Resolve.yaml
     path: ./ruleset/Apple_No_Resolve.yaml
-  
+
   Apple_Domain:
     type: http
     format: yaml
@@ -253,7 +512,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Apple/Apple_Domain.yaml
     path: ./ruleset/Apple_Domain.yaml
-  
+
   # Microsoft
   Microsoft_No_Resolve:
     type: http
@@ -262,7 +521,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Microsoft/Microsoft_No_Resolve.yaml
     path: ./ruleset/Microsoft_No_Resolve.yaml
-  
+
   # 局域网
   Lan_No_Resolve:
     type: http
@@ -271,7 +530,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/Lan/Lan_No_Resolve.yaml
     path: ./ruleset/Lan_No_Resolve.yaml
-  
+
   # 应用程序
   applications:
     type: http
@@ -280,8 +539,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/vanchKong/proxy-rules/refs/heads/main/applications-rules.txt
     path: ./ruleset/applications.yaml
-  
-  # GitHub
+
+  # Github
   Github:
     type: http
     format: yaml
@@ -289,7 +548,7 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/GitHub/GitHub.yaml
     path: ./ruleset/GitHub.yaml
-  
+
   # PT站点
   PrivateTracker:
     type: http
@@ -297,9 +556,8 @@ rule-providers:
     behavior: classical
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/blackmatrix7/ios_rule_script/master/rule/Clash/PrivateTracker/PrivateTracker.yaml
-    path: ./ruleset/PrivateTracker.yaml
-  
-  # 自定义规则
+
+  # 自定义代理规则
   custom-proxy:
     type: http
     format: yaml
@@ -307,7 +565,8 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/vanchKong/proxy-rules/refs/heads/main/custom-proxy-rules.txt
     path: ./ruleset/custom-proxy.yaml
-  
+
+  # 自定义直连规则
   custom-direct:
     type: http
     format: yaml
@@ -315,246 +574,6 @@ rule-providers:
     interval: 86400
     url: https://ghproxy.net/https://raw.githubusercontent.com/vanchKong/proxy-rules/refs/heads/main/custom-direct-rules.txt
     path: ./ruleset/custom-direct.yaml
-
-# 代理组配置
-proxy-groups:
-  - name: 地区选择 🌍
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Area.png
-    proxies:
-      - 自动选择 📡
-      - 手动选择 👌
-      - 香港节点 🇭🇰
-      - 日本节点 🇯🇵
-      - 美国节点 🇺🇸
-      - 台湾节点 🇨🇳
-      - 新加坡节点 🇸🇬
-      - 韩国节点 🇰🇷
-      - 冷门地区 ❄️
-      - 全局直连 🏠
-  
-  - name: 冷门地区 ❄️
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/World_Map.png
-    proxies:
-      - 全局直连 🏠
-    include-all: true
-    filter: ^(?!.*(?i)(剩|流量|ISP|到|重|防|电报|群组|频道|维护|付费|官|更新|United States|America|USA|US|🇺🇸|美国|SG|🇸🇬|新加坡|Singapore|JP|🇯🇵|日本|Japan|港|HK|Hong Kong|HongKong|🇭🇰|台|TAIWAN|TW|TAI WAN|🇹🇼|韩国|KR|Korea|KOR|🇰🇷)).*$
-  
-  - name: 手动选择 👌
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Available.png
-    include-all: true
-    filter: ^(?!.*(?i)(剩|流量|ISP|到|重|防|电报|群组|频道|维护|付费|官|更新)).*$
-  
-  - name: 人工智能 🤖
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bot.png
-    proxies:
-      - 日本节点 🇯🇵
-      - 美国节点 🇺🇸
-      - 新加坡节点 🇸🇬
-      - 地区选择 🌍
-      - 手动选择 👌
-  
-  - name: 巴哈姆特 📺
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Bahamut.png
-    proxies:
-      - 台湾节点 🇨🇳
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 全局直连 🏠
-  
-  - name: 谷歌服务 🇺🇸
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Google_Search.png
-    proxies:
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 香港节点 🇭🇰
-      - 日本节点 🇯🇵
-      - 美国节点 🇺🇸
-      - 台湾节点 🇨🇳
-      - 新加坡节点 🇸🇬
-      - 韩国节点 🇰🇷
-      - 冷门地区 ❄️
-  
-  - name: 蒸汽平台 🎮
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Steam.png
-    proxies:
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 香港节点 🇭🇰
-      - 日本节点 🇯🇵
-      - 美国节点 🇺🇸
-      - 台湾节点 🇨🇳
-      - 新加坡节点 🇸🇬
-      - 韩国节点 🇰🇷
-      - 冷门地区 ❄️
-  
-  - name: 奈飞服务 📺
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Netflix.png
-    proxies:
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 香港节点 🇭🇰
-      - 日本节点 🇯🇵
-      - 美国节点 🇺🇸
-      - 台湾节点 🇨🇳
-      - 新加坡节点 🇸🇬
-      - 韩国节点 🇰🇷
-      - 冷门地区 ❄️
-  
-  - name: 电报服务 💬
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Telegram.png
-    proxies:
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 香港节点 🇭🇰
-      - 日本节点 🇯🇵
-      - 美国节点 🇺🇸
-      - 台湾节点 🇨🇳
-      - 新加坡节点 🇸🇬
-      - 韩国节点 🇰🇷
-      - 冷门地区 ❄️
-  
-  - name: 微软服务 Ⓜ️
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Microsoft.png
-    proxies:
-      - 全局直连 🏠
-      - 地区选择 🌍
-      - 手动选择 👌
-  
-  - name: 苹果服务 🍎
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Apple_1.png
-    proxies:
-      - 全局直连 🏠
-      - 地区选择 🌍
-      - 手动选择 👌
-  
-  - name: 全局直连 🏠
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Direct.png
-    proxies:
-      - DIRECT
-      - REJECT
-    hidden: true
-  
-  - name: 全局拦截 🚧
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Advertising.png
-    proxies:
-      - REJECT
-      - DIRECT
-    hidden: true
-  
-  - name: 漏网之鱼 🐟
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Final.png
-    proxies:
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 全局直连 🏠
-  
-  - name: GLOBAL
-    type: select
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Global.png
-    proxies:
-      - 地区选择 🌍
-      - 手动选择 👌
-      - 全局直连 🏠
-      - 自动选择 📡
-    hidden: true
-  
-  - name: 自动选择 📡
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Auto.png
-    include-all: true
-    filter: ^(?!.*(?i)(剩|流量|ISP|到|重|防|电报|群组|频道|维护|付费|官|更新)).*$
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
-  
-  - name: 香港节点 🇭🇰
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Hong_Kong.png
-    include-all: true
-    filter: (?i)港|HK|Hong Kong|HongKong|🇭🇰
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
-  
-  - name: 台湾节点 🇨🇳
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Taiwan.png
-    include-all: true
-    filter: (?i)台|TAIWAN|TW|TAI WAN|🇹🇼
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
-  
-  - name: 美国节点 🇺🇸
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/United_States.png
-    include-all: true
-    filter: (?i)United States|America|USA|US|🇺🇸|美国
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
-  
-  - name: 日本节点 🇯🇵
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Japan.png
-    include-all: true
-    filter: (?i)JP|🇯🇵|日本|Japan
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
-  
-  - name: 新加坡节点 🇸🇬
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Singapore.png
-    include-all: true
-    filter: (?i)SG|🇸🇬|新加坡|Singapore
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
-  
-  - name: 韩国节点 🇰🇷
-    type: url-test
-    icon: https://ghproxy.net/https://raw.githubusercontent.com/Koolson/Qure/master/IconSet/Color/Korea.png
-    include-all: true
-    filter: (?i)韩国|KR|Korea|KOR|🇰🇷
-    interval: 300
-    tolerance: 15
-    timeout: 3000
-    url: https://www.google.com/generate_204
-    lazy: true
-    hidden: true
 
 # 规则配置
 rules:
